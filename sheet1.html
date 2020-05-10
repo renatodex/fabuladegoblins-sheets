@@ -1,6 +1,21 @@
 <style>
+  @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+  button[type=roll].sheet-blank-roll-button::before { content: ''; }
+
   .charsheet {
     width: 760px;
+  }
+
+  fieldset {
+    border: 0;
+  }
+
+  .sheet-title {
+    font-size: 28px;
+    font-family: Lato, Helvetica, Arial;
+    font-weight: bold;
+    margin-bottom: 14px;
   }
 
   div.sheet-header {
@@ -46,9 +61,6 @@
     background-size: 150px;
     background-repeat: no-repeat;
     margin-top: -21px;
-  }
-
-  .sheet-attribute input[type=text] {
   }
 
   .sheet-attribute .sheet-attr-value {
@@ -99,26 +111,43 @@
 
   .sheet-charinfo {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 0px;
-    height: 100px;
     width: 760px;
   }
 
-  .sheet-charinfo-name {
-    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/player-name.jpg');
+  .sheet-charinfo-race {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/player-race.png');
     background-size: 220px;
     background-repeat: no-repeat;
     width: 220px;
     height: 100px;
   }
-  .sheet-charinfo-name input {
+  .sheet-charinfo-race select {
     font-size: 18px;
     width: 180px;
     border: 0;
     position: relative;
     top: 45px;
     left: 20px;
+    background: transparent;
+  }
+
+  .sheet-charinfo-movement {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/movement2.jpg');
+    background-size: 200px;
+    background-repeat: no-repeat;
+    width: 250px;
+    height: 130px;
+  }
+  .sheet-charinfo-movement input {
+    font-size: 30px;
+    width: 100px;
+    border: 0;
+    position: relative;
+    top: 55px;
+    left: 70px;
+    text-align: left;
   }
 
   .sheet-charinfo-class {
@@ -128,7 +157,7 @@
     width: 220px;
     height: 100px;
   }
-  .sheet-charinfo-class input {
+  .sheet-charinfo-class select {
     font-size: 18px;
     width: 180px;
     border: 0;
@@ -196,7 +225,7 @@
     background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/pool-life.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
-    height: 160px;
+    height: 180px;
     border: 1px solid #fff;
     padding-left: 20px;
   }
@@ -221,7 +250,7 @@
     background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/pool-magic.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
-    height: 160px;
+    height: 180px;
     border: 1px solid #fff;
     padding-left: 20px;
   }
@@ -245,7 +274,7 @@
     background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/pool-attack.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
-    height: 170px;
+    height: 180px;
     border: 1px solid #fff;
     padding-left: 20px;
   }
@@ -285,8 +314,226 @@
     border: 0;
     background-color: #000;
   }
-</style>
 
+  .sheet-magics {
+    padding: 15px 25px;
+  }
+
+  .sheet-magics-h1 {
+    font-size: 28px;
+    font-family: Lato, Helvetica, Arial;
+    margin-bottom: 14px;
+  }
+
+  .sheet-magics-table {
+    border-collapse: collapse;
+    border: 2px solid #000;
+  }
+
+  .sheet-magics-table td {
+    padding: 8px !important;
+    border-bottom: 1px solid #e9e9e9;
+  }
+
+  .sheet-magics-table td img {
+    width: 40px;
+  }
+
+  .sheet-magics-table th {
+    padding: 8px;
+    border-bottom: 2px solid #000;
+  }
+
+  .sheet-magics-table td input {
+    padding: 4px;
+    font-size: 20px;
+    width: 60px !important;
+  }
+
+  .sheet-magics-table td, .sheet-magics-table th {
+    font-family: Lato, Helvetica, Arial;
+    border-right: 2px solid #000;
+  }
+
+  .sheet-navigation {
+    border-bottom: 3px solid #000;
+    margin-bottom: 20px;
+  }
+
+  .sheet-character,
+  .sheet-magics,
+  .sheet-equipments,
+  .sheet-inventory,
+  .sheet-habilities {
+  	display: none;
+  }
+
+  .sheet-tabinput {
+    display:none;
+  }
+
+  .sheet-tablabel {
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #000;
+    border: 0;
+    color: #fff;
+    padding: 10px 14px;
+    font-family: Lato, Helvetica, Arial;
+    font-weight:bold;
+    cursor: pointer;
+    margin-right: 7px;
+    transition: all .2s ease-in-out;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .sheet-tablabel-character {
+    width: 110px;
+  }
+
+  .sheet-tablabel-magics {
+    width: 160px;
+  }
+
+  .sheet-tablabel-equipments {
+    width: 110px;
+  }
+
+  .sheet-tablabel-inventory {
+    width: 80px;
+  }
+
+  .sheet-tablabel-habilities {
+    width: 100px;
+  }
+
+  .sheet-tablabel:hover {
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
+    transform: scale(1.05);
+  }
+
+  /* show the selected tab */
+  .sheet-tabinput-character:checked ~ div.sheet-character,
+  .sheet-tabinput-magics:checked ~ div.sheet-magics,
+  .sheet-tabinput-equipments:checked ~ div.sheet-equipments,
+  .sheet-tabinput-inventory:checked ~ div.sheet-inventory,
+  .sheet-tabinput-habilities:checked ~ div.sheet-habilities {
+  	display: block;
+  }
+
+  .sheet-tabinput-character:checked ~ .sheet-tablabel-character,
+  .sheet-tabinput-magics:checked ~ .sheet-tablabel-magics,
+  .sheet-tabinput-equipments:checked ~ .sheet-tablabel-equipments,
+  .sheet-tabinput-inventory:checked ~ .sheet-tablabel-inventory,
+  .sheet-tabinput-habilities:checked ~ .sheet-tablabel-habilities {
+    background-color: #fff !important;
+    border: 1px solid #000 !important;
+    color: #000 !important;
+  }
+
+  .sheet-end-of-navigation {
+    color: #fff;
+    border: 0;
+    height: 4px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  .sheet-page {
+    border: 4px solid #000;
+    width: 800px;
+    border-radius: 15px;
+  }
+
+  .sheet-character {
+    padding: 25px 20px;
+  }
+
+  .sheet-magics {
+    padding: 5px 25px;
+  }
+
+  .sheet-equipments {
+    padding: 5px 21px;
+  }
+
+  .sheet-inventory {
+    padding: 5px 21px;
+  }
+
+  .sheet-habilities {
+    padding: 5px 21px;
+  }
+
+  .sheet-equipped-item label {
+    /* font-family: Lato, Helvetica, Arial;
+    display:block; */
+  }
+
+  .sheet-equipeditem {
+    border: 3px solid #000;
+    padding: 5px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 14px;
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+  }
+
+  .sheet-equipeditem-formfield {
+    font-size: 14px;
+    font-family: Lato, Helvetica, Arial;
+    font-weight: bold;
+    display: block;
+    margin: 7px;
+  }
+
+  .sheet-equipeditem-formfield--mods {
+    font-size: 0px;
+  }
+
+  .sheet-equipeditem-formfield--mods span {
+    font-size: 14px;
+  }
+
+  .sheet-equipeditem-formfield--mods input {
+    font-size: 14px;
+    font-family: Lato, Helvetica, Arial;
+    font-weight: bold;
+    display: inline-block;
+    margin: 7px;
+    width: 50px;
+  }
+
+  .sheet-equipeditem-formfield span {
+    display: block;
+    margin-bottom: 7px;
+  }
+
+  .sheet-equipeditem-formfield select {
+    border: 1px solid #000;
+    padding: 10px;
+    font-size: 14px;
+    font-family: Lato, Helvetica, Arial;
+  }
+
+  .sheet-equipeditem-formfield input {
+    border: 1px solid #000;
+    padding: 10px;
+    font-size: 14px;
+    font-family: Lato, Helvetica, Arial;
+  }
+
+  .sheet-equipeditem-formfield textarea {
+    border: 1px solid #000;
+    padding: 10px;
+    font-size: 14px;
+    font-family: Lato, Helvetica, Arial;
+    width: 200px;
+    height: 40px;
+  }
+</style>
 
 <div class="charsheet">
   <div class="sheet-header">
@@ -294,87 +541,566 @@
     </div>
   </div>
 
-  <div class="sheet-charinfo">
-      <div class="sheet-charinfo-name">
-        <input type="text" name="attr_player_name" />
+  <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab'  value='character'  />
+
+  <div class="sheet-navigation">
+    <input type="radio" name="attr_tabs" id="sheet-tab-character" class="sheet-tabinput sheet-tabinput-character" checked="checked" />
+    <input type="radio" name="attr_tabs" id="sheet-tab-magics" class="sheet-tabinput sheet-tabinput-magics" />
+    <input type="radio" name="attr_tabs" id="sheet-tab-equipments" class="sheet-tabinput sheet-tabinput-equipments" />
+    <input type="radio" name="attr_tabs" id="sheet-tab-inventory" class="sheet-tabinput sheet-tabinput-inventory" />
+    <input type="radio" name="attr_tabs" id="sheet-tab-habilities" class="sheet-tabinput sheet-tabinput-habilities" />
+    <label for="sheet-tab-character" class="sheet-tablabel sheet-tablabel-character">
+      Ficha Principal
+    </label>
+    <label for="sheet-tab-magics" class="sheet-tablabel sheet-tablabel-magics">
+      Proficiências Mágicas
+    </label>
+    <label for="sheet-tab-equipments" class="sheet-tablabel sheet-tablabel-equipments">
+      Equipamentos
+    </label>
+    <label for="sheet-tab-inventory" class="sheet-tablabel sheet-tablabel-inventory">
+      Inventário
+    </label>
+    <label for="sheet-tab-habilities" class="sheet-tablabel sheet-tablabel-habilities">
+      Habilidades
+    </label>
+
+    <hr class="sheet-end-of-navigation" />
+
+    <div class="sheet-page sheet-magics">
+        <h1 class="sheet-magics-h1">Magias</h1>
+        <table class="sheet-magics-table">
+          <thead>
+            <tr>
+              <th>
+                Icone
+              </th>
+              <th>
+                Elemento
+              </th>
+              <th>
+                Ataque
+              </th>
+              <th>
+                Defesa
+              </th>
+              <th>
+                Ataque Corrupção
+              </th>
+              <th>
+                Defesa Corrupção
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/nature.png" />
+              </td>
+              <td>Natureza</td>
+              <td>
+                  <button type="roll" value="/roll 1d20 + @{element_fire_attack}" name="roll_ElementFireAttackCheck"></button>
+                  <input type="number" value="0" name="attr_element_fire_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_fire_defense}" name="roll_ElementFireDefenseCheck"></button>
+                <input type="number" value="0" name="attr_element_fire_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_fire_attack_corruption}" name="roll_ElementFireAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_fire_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_fire_defense_corruption}" name="roll_ElementFireDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_fire_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/water.png" />
+              </td>
+              <td>Agua</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_water_attack}" name="roll_ElementWaterAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_water_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_water_defense}" name="roll_ElementWaterAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_water_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_water_attack_corruption}" name="roll_ElementWaterAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_water_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_water_attack}" name="roll_ElementWaterDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_water_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/fire.png" />
+              </td>
+              <td>Fogo</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_fire_attack}" name="roll_ElementFireAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_fire_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_fire_defense}" name="roll_ElementFireAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_fire_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_fire_attack_corruption}" name="roll_ElementFireAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_fire_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_fire_attack}" name="roll_ElementFireDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_fire_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/wind.png" />
+              </td>
+              <td>Vento</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_wind_attack}" name="roll_ElementWindAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_wind_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_wind_defense}" name="roll_ElementWindAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_wind_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_wind_attack_corruption}" name="roll_ElementWindAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_wind_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_wind_attack}" name="roll_ElementWindDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_wind_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/holy.png" />
+              </td>
+              <td>Luz</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_holy_attack}" name="roll_ElementHolyAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_holy_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_holy_defense}" name="roll_ElementHolyAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_holy_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_holy_attack_corruption}" name="roll_ElementHolyAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_holy_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_holy_attack}" name="roll_ElementHolyDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_holy_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/darkness.png" />
+              </td>
+              <td>Sombras</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_darkness_attack}" name="roll_ElementDarknessAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_darkness_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_darkness_defense}" name="roll_ElementDarknessAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_darkness_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_darkness_attack_corruption}" name="roll_ElementDarknessAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_darkness_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_darkness_attack}" name="roll_ElementDarknessDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_darkness_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/eletric.png" />
+              </td>
+              <td>Eletricidade</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_eletric_attack}" name="roll_ElementEletricAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_eletric_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_eletric_defense}" name="roll_ElementEletricAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_eletric_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_eletric_attack_corruption}" name="roll_ElementEletricAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_eletric_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_eletric_attack}" name="roll_ElementEletricDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_eletric_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/arcane.png" />
+              </td>
+              <td>Arcano</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_arcane_attack}" name="roll_ElementArcaneAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_arcane_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_arcane_defense}" name="roll_ElementArcaneAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_arcane_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_arcane_attack_corruption}" name="roll_ElementArcaneAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_arcane_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_arcane_attack}" name="roll_ElementArcaneDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_arcane_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/caos.png" />
+              </td>
+              <td>Caos</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_caos_attack}" name="roll_ElementCaosAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_caos_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_caos_defense}" name="roll_ElementCaosAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_caos_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_caos_attack_corruption}" name="roll_ElementCaosAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_caos_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_caos_attack}" name="roll_ElementCaosDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_caos_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/acid.png" />
+              </td>
+              <td>Ácido</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_acid_attack}" name="roll_ElementAcidAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_acid_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_acid_defense}" name="roll_ElementAcidAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_acid_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_acid_attack_corruption}" name="roll_ElementAcidAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_acid_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_acid_attack}" name="roll_ElementAcidDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_acid_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/ice.png" />
+              </td>
+              <td>Gelo</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_ice_attack}" name="roll_ElementIceAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_ice_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_ice_defense}" name="roll_ElementIceAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_ice_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_ice_attack_corruption}" name="roll_ElementIceAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_ice_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_ice_attack}" name="roll_ElementIceDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_ice_defense_corruption" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img width=30 src="https://fabula-de-goblins.s3-us-west-2.amazonaws.com/materia.png" />
+              </td>
+              <td>Matéria</td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_materia_attack}" name="roll_ElementMateriaAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_materia_attack" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_materia_defense}" name="roll_ElementMateriaAttackCheck"></button>
+                <input type="number" value="0" name="attr_element_materia_defense" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_materia_attack_corruption}" name="roll_ElementMateriaAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_materia_attack_corruption" />
+              </td>
+              <td>
+                <button type="roll" value="/roll 1d20 + @{element_materia_attack}" name="roll_ElementMateriaDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_materia_defense_corruption" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div class="sheet-page sheet-character">
+      <div class="sheet-charinfo">
+          <div class="sheet-charinfo-race">
+            <select name="attr_player_race">
+              <option value="nenhum" selected>
+                Nenhum
+              </option>
+              <option value="monstro">
+                Monstro
+              </option>
+              <option value="special">
+                Especial
+              </option>
+              <option value="goblin">
+                Goblin
+              </option>
+              <option value="fougrat">
+                Fougrat
+              </option>
+              <option value="snalgi">
+                Snalgi
+              </option>
+              <option value="metaloide">
+                Metalóide
+              </option>
+              <option value="armadon">
+                Armadon
+              </option>
+            </select>
+          </div>
+          <div class="sheet-charinfo-class">
+              <select name="attr_player_class">
+                <option value="nenhum" selected>
+                  Nenhum
+                </option>
+                <option value="special" selected>
+                  Especial
+                </option>
+                <option value="adventurer">
+                  Aventureiro
+                </option>
+                <option value="hunter">
+                  Caçador
+                </option>
+                <option value="arcanist">
+                  Arcanista
+                </option>
+                <option value="priest">
+                  Sacerdote
+                </option>
+                <option value="fortune">
+                  Fortuno
+                </option>
+              </select>
+          </div>
+          <div class="sheet-charinfo-coins">
+              <input type="text" name="attr_player_coins" value="0" />
+          </div>
+          <div class="sheet-charinfo-level">
+              <input type="text" name="attr_player_level" value="1" />
+          </div>
       </div>
-      <div class="sheet-charinfo-class">
-          <input type="text" name="attr_player_class" />
+
+      <hr class="sheet-separator" />
+
+      <div class="sheet-attributes">
+        <div>
+          <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{str_mod})" name="roll_StrCheck"></button>
+          <div class="sheet-attribute sheet-attribute-str">
+              <input class="sheet-attr-value" type="number" name="attr_str" value="0" />
+              <input class="sheet-attr-value-mod" type="number" name="attr_str_mod" disabled="true" value="floor(@{str}/4)" />
+          </div>
+        </div>
+
+        <div>
+          <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{agi_mod})" name="roll_AgiCheck"></button>
+          <div class="sheet-attribute sheet-attribute-agi">
+              <input class="sheet-attr-value" type="number" name="attr_agi" value="0" />
+              <input class="sheet-attr-value-mod" type="number" name="attr_agi_mod" disabled="true" value="floor(@{agi}/4)" />
+          </div>
+        </div>
+
+        <div>
+          <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{int_mod})" name="roll_IntCheck"></button>
+          <div class="sheet-attribute sheet-attribute-int">
+              <input class="sheet-attr-value" type="number" name="attr_int" value="0" />
+              <input class="sheet-attr-value-mod" type="number" name="attr_int_mod" disabled="true" value="floor(@{int}/4)" />
+          </div>
+        </div>
+
+        <div>
+          <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{car_mod})" name="roll_CarCheck"></button>
+          <div class="sheet-attribute sheet-attribute-car">
+              <input class="sheet-attr-value" type="number" name="attr_car" value="0" />
+              <input class="sheet-attr-value-mod" type="number" name="attr_car_mod" disabled="true" value="floor(@{car}/4)" />
+          </div>
+        </div>
+
+        <div>
+          <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{des_mod})" name="roll_DesCheck"></button>
+          <div class="sheet-attribute sheet-attribute-des">
+              <input class="sheet-attr-value" type="number" name="attr_des" value="0" />
+              <input class="sheet-attr-value-mod" type="number" name="attr_des_mod" disabled="true" value="floor(@{des}/4)" />
+          </div>
+        </div>
       </div>
-      <div class="sheet-charinfo-coins">
-          <input type="text" name="attr_player_coins" />
+
+      <hr class="sheet-separator" />
+
+      <div class="sheet-main-grid">
+        <div class="sheet-pools">
+          <div class="sheet-pool-hp">
+            <input class="sheet-pool-hp-current" type="text" name="attr_pool_hp_current" value="0" />
+            <input class="sheet-pool-hp-max" type="text" name="attr_pool_hp_max" value="0" />
+          </div>
+
+          <div class="sheet-pool-mp">
+            <input class="sheet-pool-mp-current" type="text" name="attr_pool_mp_current" value="0" />
+            <input class="sheet-pool-mp-max" type="text" name="attr_pool_mp_max" value="0" />
+          </div>
+
+          <div class="sheet-pool-atk">
+            <input class="sheet-pool-atk-block" type="text" name="attr_pool_atk_block" value="0" />
+            <input class="sheet-pool-atk-hit" type="text" name="attr_pool_atk_hit" value="0" />
+          </div>
+        </div>
       </div>
-      <div class="sheet-charinfo-level">
-          <input type="text" name="attr_player_level" />
+
+      <hr class="sheet-separator" />
+
+      <div class="sheet-charinfo">
+          <div class="sheet-charinfo-movement">
+              <input type="text" name="attr_player_movement" value="1" />
+          </div>
       </div>
+
+      <hr class="sheet-separator" />
+    </div>
+
+    <div class="sheet-page sheet-equipments">
+      <h1 class="sheet-title">Items Equipados</h1>
+
+      <fieldset class="repeating_equipeditems">
+        <div class="sheet-equipeditem">
+          <div class="sheet-equipeditem-formfield">
+            <span>Nome do Item</span>
+            <input type="text" name="attr_equip_name" />
+          </div>
+
+          <div class="sheet-equipeditem-formfield">
+            <span>Tipo do Item</span>
+            <select name="attr_equip_range" class="itemrange">
+              <option value="none" selected>Arma</option>
+              <option value="melee">Armadura</option>
+              <option value="ranged">Outro</option>
+            </select>
+          </div>
+
+          <div class="sheet-equipeditem-formfield">
+            <span>Tipo de Ataque</span>
+            <select name="attr_equip_range" class="itemrange">
+              <option value="none" selected>Nenhum</option>
+              <option value="melee">Corpo-a-Corpo</option>
+              <option value="ranged">Distância</option>
+            </select>
+          </div>
+
+          <div class="sheet-equipeditem-formfield">
+            <span>Dado de Ataque</span>
+            <select name="attr_equip_dicetype" class="dicetype">
+              <option value="none" selected>Nenhum</option>
+              <option value="d4">d4</option>
+              <option value="d6">d6</option>
+              <option value="d8">d8</option>
+              <option value="d10">d10</option>
+              <option value="d12">d12</option>
+            </select>
+          </div>
+
+          <div class="sheet-equipeditem-formfield sheet-equipeditem-formfield--mods">
+            <span>Modificadores (ATK/DEF)</span>
+            <input type="number" name="attr_equip_defmod" value="0" />
+            <input type="number" name="attr_equip_atkmod" value="0" />
+          </div>
+
+          <div class="sheet-equipeditem-formfield">
+            <span>Observação</span>
+            <textarea name="attr_equip_notes" rows="8" cols="80"></textarea>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+
+
+    <div class="sheet-page sheet-inventory">
+      <h1 class="sheet-title">Inventário (máximo de 6 itens)</h1>
+
+      <fieldset class="repeating_equipeditems">
+        <div class="sheet-equipeditem">
+          <div class="sheet-equipeditem-formfield">
+            <span>Nome do Item</span>
+            <input type="text" name="attr_item_name" />
+          </div>
+
+          <div class="sheet-equipeditem-formfield">
+            <span>Observação</span>
+            <textarea name="attr_item_notes" rows="8" cols="80"></textarea>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+
+
+    <div class="sheet-page sheet-habilities">
+      <h1 class="sheet-title">Habilidades</h1>
+
+      <fieldset class="repeating_equipeditems">
+        <div class="sheet-equipeditem">
+          <div class="sheet-equipeditem-formfield">
+            <span>Nome do Poder</span>
+            <input type="text" name="attr_hability_name" />
+          </div>
+
+          <div class="sheet-equipeditem-formfield">
+            <span>Dano da Habilidade</span>
+            <input type="text" name="attr_hability_damage" />
+          </div>
+
+          <div class="sheet-equipeditem-formfield">
+            <span>Fórmula</span>
+            <button type="roll" value="@{hability_formula}" name="roll_HabilityFormulaRoll"></button>
+            <input type="text" name="attr_hability_formula" value="/roll @{hability_damage}" />
+          </div>
+        </div>
+      </fieldset>
+    </div>
   </div>
-
-  <hr class="sheet-separator" />
-
-  <div class="sheet-attributes">
-    <div>
-      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{str_mod})" name="roll_StrCheck"></button>
-      <div class="sheet-attribute sheet-attribute-str">
-          <input class="sheet-attr-value" type="number" name="attr_str" value="0" />
-          <input class="sheet-attr-value-mod" type="number" name="attr_str_mod" disabled="true" value="floor(@{str}/4)" />
-      </div>
-    </div>
-
-    <div>
-      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{agi_mod})" name="roll_AgiCheck"></button>
-      <div class="sheet-attribute sheet-attribute-agi">
-          <input class="sheet-attr-value" type="number" name="attr_agi" value="0" />
-          <input class="sheet-attr-value-mod" type="number" name="attr_agi_mod" disabled="true" value="floor(@{agi}/4)" />
-      </div>
-    </div>
-
-    <div>
-      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{int_mod})" name="roll_IntCheck"></button>
-      <div class="sheet-attribute sheet-attribute-int">
-          <input class="sheet-attr-value" type="number" name="attr_int" value="0" />
-          <input class="sheet-attr-value-mod" type="number" name="attr_int_mod" disabled="true" value="floor(@{int}/4)" />
-      </div>
-    </div>
-
-    <div>
-      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{car_mod})" name="roll_CarCheck"></button>
-      <div class="sheet-attribute sheet-attribute-car">
-          <input class="sheet-attr-value" type="number" name="attr_car" value="0" />
-          <input class="sheet-attr-value-mod" type="number" name="attr_car_mod" disabled="true" value="floor(@{car}/4)" />
-      </div>
-    </div>
-
-    <div>
-      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{des_mod})" name="roll_DesCheck"></button>
-      <div class="sheet-attribute sheet-attribute-des">
-          <input class="sheet-attr-value" type="number" name="attr_des" value="0" />
-          <input class="sheet-attr-value-mod" type="number" name="attr_des_mod" disabled="true" value="floor(@{des}/4)" />
-      </div>
-    </div>
-  </div>
-
-  <hr class="sheet-separator" />
-
-  <div class="sheet-main-grid">
-    <div class="sheet-pools">
-      <div class="sheet-pool-hp">
-        <input class="sheet-pool-hp-current" type="text" name="attr_pool_hp_current" />
-        <input class="sheet-pool-hp-max" type="text" name="attr_pool_hp_max" />
-      </div>
-
-      <div class="sheet-pool-mp">
-        <input class="sheet-pool-mp-current" type="text" name="attr_pool_mp_current" />
-        <input class="sheet-pool-mp-max" type="text" name="attr_pool_mp_max" />
-      </div>
-
-      <div class="sheet-pool-atk">
-        <input class="sheet-pool-atk-block" type="text" name="attr_pool_atk_block" />
-        <input class="sheet-pool-atk-hit" type="text" name="attr_pool_atk_hit" />
-      </div>
-    </div>
-  </div>
-
-  <hr class="sheet-separator" />
 </div>
 <script type="text/worker">
 // on("change:str sheet:opened", function() {
