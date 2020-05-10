@@ -1,0 +1,395 @@
+<style>
+  .charsheet {
+    width: 760px;
+  }
+
+  div.sheet-header {
+    padding-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  div.sheet-logo {
+    font-family: Arial;
+    font-size: 30px;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+    height: 60px;
+    width: 300px;
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/logo.jpg');
+    background-size: 300px;
+    background-repeat: no-repeat;
+  }
+
+  div.sheet-field {
+    font-family: Arial;
+    font-weight: bold;
+  }
+
+  .sheet-field input[type=text] {
+    font-family: Arial;
+    font-size: 16px;
+    border: 2px solid #000;
+    margin-top: 4px;
+    padding: 7px;
+  }
+
+  .sheet-attributes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 800px;
+  }
+
+  .sheet-attribute {
+    height: 100px;
+    width: 150px;
+    background-size: 150px;
+    background-repeat: no-repeat;
+    margin-top: -21px;
+  }
+
+  .sheet-attribute input[type=text] {
+  }
+
+  .sheet-attribute .sheet-attr-value {
+    font-size: 30px;
+    width: 48px !important;
+    background-color: transparent;
+    border: 0;
+    position: relative;
+    left: 86px;
+    top: 13px;
+    text-align: center;
+    border: 1px solid #000;
+    font-size: 18px;
+  }
+
+  .sheet-attribute .sheet-attr-value-mod {
+    font-size: 14px;
+    width: 38px !important;
+    background-color: transparent;
+    border: 0;
+    position: relative;
+    left: 61px;
+    top: 46px;
+    -webkit-appearance: none;
+    margin: 0px;
+    text-align: center;
+  }
+
+  .sheet-attribute-des {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/attr-destino.jpg');
+  }
+
+  .sheet-attribute-agi {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/attr-agilidade.jpg');
+  }
+
+  .sheet-attribute-str {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/attr-forca.jpg');
+  }
+
+  .sheet-attribute-int {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/attr-inteligencia.jpg');
+  }
+
+  .sheet-attribute-car {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/attr-carisma.jpg');
+  }
+
+  .sheet-charinfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 0px;
+    height: 100px;
+    width: 760px;
+  }
+
+  .sheet-charinfo-name {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/player-name.jpg');
+    background-size: 220px;
+    background-repeat: no-repeat;
+    width: 220px;
+    height: 100px;
+  }
+  .sheet-charinfo-name input {
+    font-size: 18px;
+    width: 180px;
+    border: 0;
+    position: relative;
+    top: 45px;
+    left: 20px;
+  }
+
+  .sheet-charinfo-class {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/player-class.jpg');
+    background-size: 220px;
+    background-repeat: no-repeat;
+    width: 220px;
+    height: 100px;
+  }
+  .sheet-charinfo-class input {
+    font-size: 18px;
+    width: 180px;
+    border: 0;
+    position: relative;
+    top: 45px;
+    left: 20px;
+  }
+
+  .sheet-charinfo-coins {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/player-coins.jpg');
+    background-size: 220px;
+    background-repeat: no-repeat;
+    width: 220px;
+    height: 100px;
+  }
+  .sheet-charinfo-coins input {
+    font-size: 18px;
+    width: 130px;
+    border: 0;
+    position: relative;
+    top: 45px;
+    left: 65px;
+  }
+
+  .sheet-charinfo-level {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/player-level.jpg');
+    background-size: 93px;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+  }
+  .sheet-charinfo-level input {
+    font-size: 18px;
+    width: 50px;
+    border: 0;
+    position: relative;
+    top: 45px;
+    left: 20px;
+  }
+
+  .sheet-main-grid {
+    display: grid;
+    grid-template-columns: 2.7fr 1fr;
+  }
+
+  .sheet-flaws {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/flaws.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding: 60px 25px 25px 25px;
+    box-sizing: border-box;
+  }
+  .sheet-flaws textarea {
+    width: 98%;
+    height: 395px;
+    background-color: transparent;
+  }
+
+  .sheet-pools {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .sheet-pool-hp {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/pool-life.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 160px;
+    border: 1px solid #fff;
+    padding-left: 20px;
+  }
+  .sheet-pool-hp input {
+    font-size: 26px;
+    width: 60px;
+    display: block;
+    margin: 0 auto;
+    border: 0;
+    background-color: transparent;
+    text-align:center;
+  }
+  .sheet-pool-hp .sheet-pool-hp-current {
+    margin-top: 52px;
+  }
+  .sheet-pool-hp .sheet-pool-hp-max {
+    margin-top: 12px;
+  }
+
+
+  .sheet-pool-mp {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/pool-magic.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 160px;
+    border: 1px solid #fff;
+    padding-left: 20px;
+  }
+  .sheet-pool-mp input {
+    font-size: 26px;
+    width: 60px;
+    display: block;
+    margin: 0 auto;
+    border: 0;
+    background-color: transparent;
+    text-align:center;
+  }
+  .sheet-pool-mp .sheet-pool-mp-current {
+    margin-top: 52px;
+  }
+  .sheet-pool-mp .sheet-pool-mp-max {
+    margin-top: 12px;
+  }
+
+  .sheet-pool-atk {
+    background-image: url('https://fabula-de-goblins.s3-us-west-2.amazonaws.com/pool-attack.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 170px;
+    border: 1px solid #fff;
+    padding-left: 20px;
+  }
+  .sheet-pool-atk input {
+    font-size: 26px;
+    width: 48px;
+    display: block;
+    margin: 0 auto;
+    border: 0;
+    background-color: transparent;
+    text-align:center;
+  }
+  .sheet-pool-atk .sheet-pool-atk-block {
+    margin-top: 52px;
+  }
+  .sheet-pool-atk .sheet-pool-atk-hit {
+    margin-top: 8px;
+    margin-left: 46px;
+  }
+
+  .sheet-attr-roll::before {
+    font-size: 13px !important;
+  }
+  .sheet-attr-roll {
+    padding: 0px 3px !important;
+    font-size: 1.3em !important;
+    margin: 0px !important;
+    position: relative;
+    top: 76px;
+    left: 121px;
+  }
+
+  .sheet-separator {
+    width: 780px;
+    height: 3px;
+    margin: 15px;
+    border: 0;
+    background-color: #000;
+  }
+</style>
+
+
+<div class="charsheet">
+  <div class="sheet-header">
+    <div class="sheet-logo">
+    </div>
+  </div>
+
+  <div class="sheet-charinfo">
+      <div class="sheet-charinfo-name">
+        <input type="text" name="attr_player_name" />
+      </div>
+      <div class="sheet-charinfo-class">
+          <input type="text" name="attr_player_class" />
+      </div>
+      <div class="sheet-charinfo-coins">
+          <input type="text" name="attr_player_coins" />
+      </div>
+      <div class="sheet-charinfo-level">
+          <input type="text" name="attr_player_level" />
+      </div>
+  </div>
+
+  <hr class="sheet-separator" />
+
+  <div class="sheet-attributes">
+    <div>
+      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{str_mod})" name="roll_StrCheck"></button>
+      <div class="sheet-attribute sheet-attribute-str">
+          <input class="sheet-attr-value" type="number" name="attr_str" value="0" />
+          <input class="sheet-attr-value-mod" type="number" name="attr_str_mod" disabled="true" value="floor(@{str}/4)" />
+      </div>
+    </div>
+
+    <div>
+      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{agi_mod})" name="roll_AgiCheck"></button>
+      <div class="sheet-attribute sheet-attribute-agi">
+          <input class="sheet-attr-value" type="number" name="attr_agi" value="0" />
+          <input class="sheet-attr-value-mod" type="number" name="attr_agi_mod" disabled="true" value="floor(@{agi}/4)" />
+      </div>
+    </div>
+
+    <div>
+      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{int_mod})" name="roll_IntCheck"></button>
+      <div class="sheet-attribute sheet-attribute-int">
+          <input class="sheet-attr-value" type="number" name="attr_int" value="0" />
+          <input class="sheet-attr-value-mod" type="number" name="attr_int_mod" disabled="true" value="floor(@{int}/4)" />
+      </div>
+    </div>
+
+    <div>
+      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{car_mod})" name="roll_CarCheck"></button>
+      <div class="sheet-attribute sheet-attribute-car">
+          <input class="sheet-attr-value" type="number" name="attr_car" value="0" />
+          <input class="sheet-attr-value-mod" type="number" name="attr_car_mod" disabled="true" value="floor(@{car}/4)" />
+      </div>
+    </div>
+
+    <div>
+      <button type="roll" class="sheet-attr-roll" value="/roll 1d20 + floor(@{des_mod})" name="roll_DesCheck"></button>
+      <div class="sheet-attribute sheet-attribute-des">
+          <input class="sheet-attr-value" type="number" name="attr_des" value="0" />
+          <input class="sheet-attr-value-mod" type="number" name="attr_des_mod" disabled="true" value="floor(@{des}/4)" />
+      </div>
+    </div>
+  </div>
+
+  <hr class="sheet-separator" />
+
+  <div class="sheet-main-grid">
+    <div class="sheet-pools">
+      <div class="sheet-pool-hp">
+        <input class="sheet-pool-hp-current" type="text" name="attr_pool_hp_current" />
+        <input class="sheet-pool-hp-max" type="text" name="attr_pool_hp_max" />
+      </div>
+
+      <div class="sheet-pool-mp">
+        <input class="sheet-pool-mp-current" type="text" name="attr_pool_mp_current" />
+        <input class="sheet-pool-mp-max" type="text" name="attr_pool_mp_max" />
+      </div>
+
+      <div class="sheet-pool-atk">
+        <input class="sheet-pool-atk-block" type="text" name="attr_pool_atk_block" />
+        <input class="sheet-pool-atk-hit" type="text" name="attr_pool_atk_hit" />
+      </div>
+    </div>
+  </div>
+
+  <hr class="sheet-separator" />
+</div>
+<script type="text/worker">
+// on("change:str sheet:opened", function() {
+//   getAttrs(["str"], function(values) {
+//     let str = parseInt(values.str,10)||0;
+//     let agi = parseInt(values.agi,10)||0;
+//     let strMod = Math.floor(str / 4);
+//     let agiMod = Math.floor(agi / 4);
+//     console.log('Valor', str, strMod);
+//     setAttrs({
+//       str: str,
+//       str_mod: strMod,
+//       agi: agi,
+//       agi_mod: agiMod,
+//     });
+//   });
+// });
+</script>
