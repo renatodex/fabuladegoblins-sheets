@@ -356,7 +356,6 @@
   }
 
   .sheet-navigation {
-    border-bottom: 3px solid #000;
     margin-bottom: 20px;
   }
 
@@ -481,6 +480,10 @@
     box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
   }
 
+  .sheet-equipeditem--hability {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
   .sheet-equipeditem-formfield {
     font-size: 14px;
     font-family: Lato, Helvetica, Arial;
@@ -590,6 +593,12 @@
               <th>
                 Defesa Corrupção
               </th>
+              <th>
+                Fraqueza?
+              </th>
+              <th>
+                Resistência?
+              </th>
             </tr>
           </thead>
 
@@ -600,20 +609,26 @@
               </td>
               <td>Natureza</td>
               <td>
-                  <button type="roll" value="/roll 1d20 + @{element_fire_attack}" name="roll_ElementFireAttackCheck"></button>
-                  <input type="number" value="0" name="attr_element_fire_attack" />
+                  <button type="roll" value="/roll 1d20 + @{element_nature_attack}" name="roll_ElementNatureAttackCheck"></button>
+                  <input type="number" value="0" name="attr_element_nature_attack" />
               </td>
               <td>
-                <button type="roll" value="/roll 1d20 + @{element_fire_defense}" name="roll_ElementFireDefenseCheck"></button>
-                <input type="number" value="0" name="attr_element_fire_defense" />
+                <button type="roll" value="/roll 1d20 + @{element_nature_defense}" name="roll_ElementNatureDefenseCheck"></button>
+                <input type="number" value="0" name="attr_element_nature_defense" />
               </td>
               <td>
-                <button type="roll" value="/roll 1d20 + @{element_fire_attack_corruption}" name="roll_ElementFireAttackCorruptionCheck"></button>
-                <input type="number" value="0" name="attr_element_fire_attack_corruption" />
+                <button type="roll" value="/roll 1d20 + @{element_nature_attack_corruption}" name="roll_ElementNatureAttackCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_nature_attack_corruption" />
               </td>
               <td>
-                <button type="roll" value="/roll 1d20 + @{element_fire_defense_corruption}" name="roll_ElementFireDefenseCorruptionCheck"></button>
-                <input type="number" value="0" name="attr_element_fire_defense_corruption" />
+                <button type="roll" value="/roll 1d20 + @{element_nature_defense_corruption}" name="roll_ElementNatureDefenseCorruptionCheck"></button>
+                <input type="number" value="0" name="attr_element_nature_defense_corruption" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_nature_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_nature_resistance" />
               </td>
             </tr>
             <tr>
@@ -637,6 +652,12 @@
                 <button type="roll" value="/roll 1d20 + @{element_water_attack}" name="roll_ElementWaterDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_water_defense_corruption" />
               </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_water_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_water_resistance" />
+              </td>
             </tr>
             <tr>
               <td>
@@ -658,6 +679,12 @@
               <td>
                 <button type="roll" value="/roll 1d20 + @{element_fire_attack}" name="roll_ElementFireDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_fire_defense_corruption" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_fire_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_fire_resistance" />
               </td>
             </tr>
             <tr>
@@ -681,6 +708,12 @@
                 <button type="roll" value="/roll 1d20 + @{element_wind_attack}" name="roll_ElementWindDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_wind_defense_corruption" />
               </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_wind_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_wind_resistance" />
+              </td>
             </tr>
             <tr>
               <td>
@@ -702,6 +735,12 @@
               <td>
                 <button type="roll" value="/roll 1d20 + @{element_holy_attack}" name="roll_ElementHolyDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_holy_defense_corruption" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_holy_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_holy_resistance" />
               </td>
             </tr>
             <tr>
@@ -725,6 +764,12 @@
                 <button type="roll" value="/roll 1d20 + @{element_darkness_attack}" name="roll_ElementDarknessDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_darkness_defense_corruption" />
               </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_darkness_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_darkness_resistance" />
+              </td>
             </tr>
             <tr>
               <td>
@@ -746,6 +791,12 @@
               <td>
                 <button type="roll" value="/roll 1d20 + @{element_eletric_attack}" name="roll_ElementEletricDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_eletric_defense_corruption" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_eletric_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_eletric_resistance" />
               </td>
             </tr>
             <tr>
@@ -769,6 +820,12 @@
                 <button type="roll" value="/roll 1d20 + @{element_arcane_attack}" name="roll_ElementArcaneDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_arcane_defense_corruption" />
               </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_arcane_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_arcane_resistance" />
+              </td>
             </tr>
             <tr>
               <td>
@@ -790,6 +847,12 @@
               <td>
                 <button type="roll" value="/roll 1d20 + @{element_caos_attack}" name="roll_ElementCaosDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_caos_defense_corruption" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_caos_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_caos_resistance" />
               </td>
             </tr>
             <tr>
@@ -813,6 +876,12 @@
                 <button type="roll" value="/roll 1d20 + @{element_acid_attack}" name="roll_ElementAcidDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_acid_defense_corruption" />
               </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_acid_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_acid_resistance" />
+              </td>
             </tr>
             <tr>
               <td>
@@ -835,6 +904,12 @@
                 <button type="roll" value="/roll 1d20 + @{element_ice_attack}" name="roll_ElementIceDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_ice_defense_corruption" />
               </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_ice_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_ice_resistance" />
+              </td>
             </tr>
             <tr>
               <td>
@@ -856,6 +931,12 @@
               <td>
                 <button type="roll" value="/roll 1d20 + @{element_materia_attack}" name="roll_ElementMateriaDefenseCorruptionCheck"></button>
                 <input type="number" value="0" name="attr_element_materia_defense_corruption" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_materia_weakness" />
+              </td>
+              <td>
+                <input type="checkbox" value="0" name="attr_element_materia_resistance" />
               </td>
             </tr>
           </tbody>
@@ -996,6 +1077,18 @@
           <div class="sheet-charinfo-movement">
               <input type="text" name="attr_player_movement" value="1" />
           </div>
+
+          <div class="sheet-charinfo-rolls">
+            <button type="roll" value="/roll d20 + floor(@{pool_atk_hit}/4)" name="roll_AttackCheck">
+              Rolar Ataque
+            </button>
+            <button type="roll" value="/roll d20 + floor(@{pool_atk_block}/4)" name="roll_BlockCheck">
+              Rolar Defesa
+            </button>
+            <button type="roll" value="/roll d20 + @{agi_mod}" name="roll_InitiativeCheck">
+              Rolar Iniciativa
+            </button>
+          </div>
       </div>
 
       <hr class="sheet-separator" />
@@ -1080,22 +1173,65 @@
     <div class="sheet-page sheet-habilities">
       <h1 class="sheet-title">Habilidades</h1>
 
-      <fieldset class="repeating_equipeditems">
-        <div class="sheet-equipeditem">
+      <fieldset class="repeating_habilities">
+        <div class="sheet-equipeditem sheet-equipeditem--hability">
           <div class="sheet-equipeditem-formfield">
             <span>Nome do Poder</span>
             <input type="text" name="attr_hability_name" />
           </div>
 
           <div class="sheet-equipeditem-formfield">
-            <span>Dano da Habilidade</span>
-            <input type="text" name="attr_hability_damage" />
+            <span>Custo de Magia</span>
+            <input type="number" name="attr_hability_magic_cost" style="width: 100px;" />
           </div>
 
           <div class="sheet-equipeditem-formfield">
-            <span>Fórmula</span>
-            <button type="roll" value="@{hability_formula}" name="roll_HabilityFormulaRoll"></button>
-            <input type="text" name="attr_hability_formula" value="/roll @{hability_damage}" />
+            <span>Tipo de Alvo</span>
+            <select name="attr_hability_target" class="dicetype">
+              <option value="none" selected>Nenhum</option>
+              <option value="target">Alvo</option>
+              <option value="point">Ponto</option>
+              <option value="area">Área</option>
+              <option value="cone">Cone</option>
+              <option value="circular">Circular</option>
+            </select>
+          </div>
+
+          <div class="sheet-equipeditem-formfield">
+            <span>Fórmula de Dano <button type="roll" value="@{hability_formula}" name="roll_HabilityFormulaRoll"></button></span>
+            <input type="text" name="attr_hability_formula" value="/roll @{hability_damage}" style="width: 180px;" />
+          </div>
+
+          <div class="sheet-equipeditem-formfield">
+            <input type="hidden" value="0" name="attr_hability_element_correspondent_attack" />
+            <span>Elemento <button type="roll" value="/roll d20 + @{hability_element_correspondent_attack}" name="roll_HabilityElementRoll"></button></span>
+            <select name="attr_hability_element" class="dicetype">
+              <option value="none" selected>Nenhum</option>
+              <option value="element_fire_attack">Fogo</option>
+              <option value="element_fire_attack_corruption">Fogo Corrompido</option>
+              <option value="element_water_attack">Agua</option>
+              <option value="element_water_attack_corruption">Agua Corrompida</option>
+              <option value="element_wind_attack">Vento</option>
+              <option value="element_wind_attack_corruption">Vento Corrompido</option>
+              <option value="element_eletric_attack">Eletricidade</option>
+              <option value="element_eletric_attack_corruption">Eletricidade Corrompida</option>
+              <option value="element_ice_attack">Gelo</option>
+              <option value="element_ice_attack_corruption">Gelo Corrompido</option>
+              <option value="element_nature_attack">Natureza</option>
+              <option value="element_nature_attack_corruption">Natureza Corrompida</option>
+              <option value="element_acid_attack">Ácido</option>
+              <option value="element_acid_attack_corruption">Ácido Corrompido</option>
+              <option value="element_materia_attack">Materia</option>
+              <option value="element_materia_attack_corruption">Materia Corrompida</option>
+              <option value="element_arcane_attack">Arcano</option>
+              <option value="element_arcane_attack_corruption">Arcano Corrompido</option>
+              <option value="element_holy_attack">Luz</option>
+              <option value="element_holy_attack_corruption">Luz Corrompida</option>
+              <option value="element_darkness_attack">Trevas</option>
+              <option value="element_darkness_attack_corruption">Trevas Corrompida</option>
+              <option value="element_caos_attack">Caos</option>
+              <option value="element_caos_attack_corruption">Caos Corrompido</option>
+            </select>
           </div>
         </div>
       </fieldset>
@@ -1118,4 +1254,38 @@
 //     });
 //   });
 // });
+on("change:repeating_habilities:hability_element", function(eventInfo) {
+  console.log('Info', eventInfo)
+  getAttrs([eventInfo['newValue']], function(values) {
+    console.log('Valores', values)
+    var correspondentAttack = values[eventInfo['newValue']]
+    if (correspondentAttack) {
+      console.log('Achou valor', correspondentAttack)
+      setAttrs({
+        repeating_habilities_hability_element_correspondent_attack: correspondentAttack,
+      })
+    } else {
+      console.log('Não Achou valor', correspondentAttack)
+      setAttrs({
+        repeating_habilities_hability_element_correspondent_attack: 0,
+      })
+    }
+  })
+
+
+    // on("sheet:compendium-drop", function() {
+    //     var default_attr = {};
+    //     default_attr["width"] = 70;
+    //     default_attr["height"] = 70;
+    //     default_attr["bar1_value"] = 10;
+    //     default_attr["bar1_max"] = 15;
+    //     setDefaultToken(default_attr);
+    // });
+   //Do something here
+   // eventInfo.sourceAttribute is the full name (including repeating ID) of the attribute
+   // that originally triggered this event,
+   // however the entire string will have been translated into lowercase and thus might not be
+   // suitable for being fed directly
+   // into getAttrs() or other uses without being devandalized first.
+});
 </script>
